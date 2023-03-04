@@ -1,7 +1,7 @@
 <form>
   <label for="search">Search for a movie:</label><br>
-  <input type="search" #query required minlength="3" matInput placeholder="Search for a movie..."  >
-  <button (click)="searchMovie()">Search</button>
+  <input type="text" #box required placeholder="Search for a movie here..." name="search" >
+  <button (click)="searchMovie(box.value)">Search</button>
 </form>
 
 <button (click)="openPopup()">popup</button>
