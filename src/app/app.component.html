@@ -4,10 +4,9 @@
   <button (click)="searchMovie(box.value)">Search</button>
 </form>
 
-<button (click)="openPopup()">popup</button>
 
+<app-movie-details *ngFor="let movie of results" [results]="results"></app-movie-details>
 
-<!--
 <div *ngFor="let movie of results">
   <mat-card>
     <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}" class="mat-card-image">
@@ -23,6 +22,6 @@
   </mat-card>
 </div>
 
--->
+
 
 <router-outlet></router-outlet>

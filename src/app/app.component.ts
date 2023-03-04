@@ -19,7 +19,7 @@ export class AppComponent {
   openPopup(){
     let params = `scrollbars=no,resizable=yes,status=no,location=no,toolbar=no,menubar=no,width=600,height=600,left=100,top=100`;
 
-  open('/geiasas','hello',params) ;
+  open('/movie-details','hello',params) ;
   }
 
   constructor(private http: HttpClient) { }
