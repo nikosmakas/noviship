@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http'; //import http client and construct it above the searchMovie()
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -14,19 +15,11 @@ import { HttpClient } from '@angular/common/http'; //import http client and cons
 export class AppComponent {
   title = 'noviship';
 
-  results: any[] = [];
+  
 
-  openPopup(){
-    let params = `scrollbars=no,resizable=yes,status=no,location=no,toolbar=no,menubar=no,width=600,height=600,left=100,top=100`;
 
-  open('/movie-details','hello',params) ;
-  }
 
-  constructor(private http: HttpClient) { }
 
-  searchMovie(val: string){    
-    this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=${val}`).subscribe(data => {this.results=data.results});
-    
-  }
+
 
 }
