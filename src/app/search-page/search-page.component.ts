@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
+import { OnInit } from '@angular/core';
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
@@ -9,31 +10,54 @@ import { MovieDetailsComponent } from '../movie-details/movie-details.component'
 })
 export class SearchPageComponent {
 
+  api_key: string = "85204a8cc33baf447559fb6d51b18313";
 
   results: any[] = [];
 
-  openPopup() {
-    //let params = `scrollbars=no,resizable=yes,status=no,location=no,toolbar=no,menubar=no,width=600,height=600,left=100,top=100`;
-    const dialogConfig = new MatDialogConfig();
+  guestSessionId!: string;
 
-    dialogConfig.disableClose= false;
-    dialogConfig.autoFocus= true;
+  ngOnInit() {
+    //get session id
+    this.http.get<any>(`https://api.themoviedb.org/3/authentication/guest_session/new?api_key=${this.api_key}`)
+    .subscribe(data => { this.guestSessionId = data.guest_session_id })
+    
+  }
 
-    this.dialog.open(MovieDetailsComponent,dialogConfig);
+  openPopup(getId: any) {
+    const dialogConfig: any = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.closeOnNavigation = true;
+    dialogConfig.minHeight = 500;
+    dialogConfig.minWidth = 400;
+    dialogConfig.data = {
+      id: getId,
+      sessionId: this.guestSessionId,
+      api_key: this.api_key
+    };
+    
 
 
+    this.dialog.open(MovieDetailsComponent, dialogConfig);
 
-    //open('/movie-details', 'hello', params);
   }
 
   constructor(private http: HttpClient,
     private dialog: MatDialog) { }
 
   searchMovie(val: string) {
-
-    this.http.get<any>("https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=joker").subscribe(data => { this.results = data.results });
-
+    if (val) {
+      this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=${val}`, undefined) //hard coded due to a CORS(?) error
+        .subscribe(data => { this.results = data.results });
+    }
+    else {
+      this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=joker`, undefined)
+        .subscribe(data => { this.results = data.results });
+    }
   }
+  // to be replaced with `https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=${val}`
+
 
 
 

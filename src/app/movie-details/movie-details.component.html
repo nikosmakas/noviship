@@ -1,25 +1,48 @@
-<p>Hello!</p>
+<h1 style="text-align: center; font-weight: bolder;">Movie Details</h1>
+<!-- <router-outlet></router-outlet> -->
 
-<a routerLink=""><button> back to search</button></a>
 
-<div *ngFor="let movie of selectedMovie"> 
+
+
+<fieldset>
+  <div>
+    <!-- *ngFor="let movie of selectedMovie" only has one movie, but it SHOULD work-->
     <mat-card>
-      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}" class="mat-card-image">
+      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + results.poster_path" alt="{{ results.title }}"
+        class="mat-card-image">
       <mat-card-content>
-        <span class="mat-card-title">{{ movie.title }}</span>
-        <p class="mat-card-subtitle">{{ movie.overview }}</p>
-        <p class="mat-card-content">{{movie.budget}}</p>
-        <p class="mat-card-content">{{ movie.release_date | date }}</p>
-        <p class="mat-card-content">{{movie.revenue}}</p>
-        <p class="mat-card-content">Average Rating: {{ movie.vote_average }}</p>
-        <p class="mat-card-content">{{movie.vote_count}}</p>
-        <p class="mat-card-content">{{movie.spoken_languages}}</p> 
-    
-    </mat-card-content> 
-    <input type="range" 
-    id="rating" min="0.5" max="10" step="0.5" name="rating" #range 
-    (mouseup)="readRating(range.value)" (mousedown)="readRating(range.value)" (drag)="readRating(range.value)">{{rated}} 
-    <button  (click)="postRating()">Post Rating</button>
-    </mat-card>
-  </div> 
+        <span class="mat-card-title">{{ results.title }}</span>
+        <p class="mat-card-subtitle">OverView : {{ results.overview }}</p>
+        <p class="mat-card-content">Budget : {{results.budget}}</p>
+        <p class="mat-card-content">ReleaseDate : {{ results.release_date | date }}</p>
+        <p class="mat-card-content">Revenue : {{results.revenue}}</p>
+        <p class="mat-card-content">Average Rating : {{ results.vote_average }}</p>
+        <p class="mat-card-content">VoteCount:  {{results.vote_count}}</p>
 
+
+        <div *ngFor="let lang of results.spoken_languages"> <!--FIX THIS-->
+        
+          <p class="mat-card-content">Spoken Languages: {{lang.english_name}},</p>
+        </div>
+
+
+
+      </mat-card-content>
+      <input type="range" id="rating" min="0.5" max="10.0" step="0.5" name="rating" #range
+        (mouseup)="readRating(range.value)" (mousedown)="readRating(range.value)"
+        (mousemove)="readRating(range.value)">{{rated}}
+      <button (click)="postRating()">Post Rating</button>
+    </mat-card>
+  </div>
+</fieldset>
+
+
+
+
+
+
+
+
+<footer>
+  <a routerLink=""><button (click)="closePopup()"> Back to SearchPage</button></a>
+</footer>
