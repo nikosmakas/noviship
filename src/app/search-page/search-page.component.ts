@@ -22,9 +22,12 @@ export class SearchPageComponent implements OnInit {
     private dialog: MatDialog,
     private fb: FormBuilder) {
     this.searchForm = this.fb.group({
-      searchQuery: ['', [Validators.required, Validators.minLength(3), this.validator()]]
-    });
+      searchQuery:''
+      });
   }
+  //formControl
+  searchForm!: FormGroup;
+  searchQuery!: string;
 
   ngOnInit() {
     //get session id
@@ -57,18 +60,9 @@ export class SearchPageComponent implements OnInit {
   pageIndex!: number;
   total_pages: any;
 
-  //formControl
-  searchQuery!: FormControl;
-  searchForm!: FormGroup;
 
-  validator() {
-    return (control: { value: string; }) => {
-      if (control.value && !/^[a-zA-Z0-9]+$/.test(control.value)) {
-        return { 'alphanumeric': true };
-      }
-      return null;
-    };
-  }
+
+
 
   searchMovie(val: string) {
     this.replaced = val.toString().replace(/ /g, '+');
