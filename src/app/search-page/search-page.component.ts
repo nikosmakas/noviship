@@ -3,7 +3,7 @@ import { Component, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
 import { OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Form, FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-page',
@@ -19,7 +19,12 @@ export class SearchPageComponent {
   guestSessionId!: string;
 
   constructor(private http: HttpClient,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private fb: FormBuilder) { 
+      this.searchForm = this.fb.group({
+        searchQuery: ['', [Validators.required, Validators.minLength(3), this.validator()]]
+      });
+    }
 
   ngOnInit() {
     //get session id
@@ -53,8 +58,18 @@ export class SearchPageComponent {
   total_pages: any;
 
  //formControl
-  query = new FormControl();
+  searchQuery!: FormControl;
+  searchForm!: any;
 
+  validator() {
+    return (control: { value: string; }) => {
+      if (control.value && !/^[a-zA-Z0-9]+$/.test(control.value)) {
+        return { 'alphanumeric': true };
+      }
+      return null;
+    };
+  }
+  
   searchMovie(val: string) {
     if (val) {
       this.replaced = val.toString().replace(/ /g, '+');

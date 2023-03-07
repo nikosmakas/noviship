@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { SearchPageComponent } from './search-page/search-page.component'; //lets make an http request
-
+import { FormsModule } from '@angular/forms';
 import { ValidatorDirective } from './validator.directive';
 
 @NgModule({
@@ -28,7 +28,8 @@ import { ValidatorDirective } from './validator.directive';
     BrowserAnimationsModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
     
   ],
   providers: [],

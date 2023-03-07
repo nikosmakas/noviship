@@ -1,7 +1,11 @@
 <form>
     <label for="search">Search for a movie:</label><br>
-    <input type="text" #query required placeholder="Search for a movie here..." name="search">
-    
+    <input type="text" #query required [(ngModel)]="searchQuery" placeholder="Search for a movie here..." name="search">
+    <div *ngIf="searchForm.controls['searchQuery'].errors">
+        <div *ngIf="searchForm.get('searchQuery')?.hasError('required')">This field is required</div>
+        <div *ngIf="searchForm.get('searchQuery')?.hasError('minlength')">This field must be at least 3 characters long</div>
+        <div *ngIf="searchForm.get('searchQuery')?.hasError('alphanumeric')">This field must contain only letters and numbers</div>
+    </div>
     <button (click)="searchMovie(query.value)">Search</button>
 </form>
 
@@ -16,7 +20,7 @@
                 class="mat-card-image">
             <mat-card-content>
                 <span class="mat-card-title">{{ movie.title }}</span>
-                
+
                 <p class="mat-card-subtitle">{{ movie.release_date | date }}</p>
                 <p class="mat-card-content">{{ movie.overview }}</p>
                 <p class="mat-card-content">Average Rating: {{ movie.vote_average }}</p>
