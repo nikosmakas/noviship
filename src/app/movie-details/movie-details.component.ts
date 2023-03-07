@@ -43,11 +43,6 @@ export class MovieDetailsComponent implements OnInit {
     this.dialogRef.close();
   }
 
-
-  checkSesId() {
-    console.log(this.guestSessionId)
-  }
-
   readRating(val: string) {
 
     this.rated = parseFloat(val);

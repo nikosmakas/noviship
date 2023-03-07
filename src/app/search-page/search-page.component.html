@@ -1,6 +1,6 @@
 <form>
     <label for="search">Search for a movie:</label><br>
-    <input type="text" #query required [(ngModel)]="searchQuery" placeholder="Search for a movie here..." name="search">
+    <input type="text" #query required [(ngModel)]="searchQuery" placeholder="Search for a movie here..." name="search" appValidator>
     <div *ngIf="searchForm.controls['searchQuery'].errors">
         <div *ngIf="searchForm.get('searchQuery')?.hasError('required')">This field is required</div>
         <div *ngIf="searchForm.get('searchQuery')?.hasError('minlength')">This field must be at least 3 characters long</div>
