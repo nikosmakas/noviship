@@ -22,7 +22,7 @@ export class MovieDetailsComponent implements OnInit {
   guestSessionId!: string;
 
   rated!: number;
-  
+
   constructor(private http: HttpClient,
     private dialogRef: MatDialogRef<MovieDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) data: any) {
@@ -44,7 +44,9 @@ export class MovieDetailsComponent implements OnInit {
   }
 
 
-
+  checkSesId() {
+    console.log(this.guestSessionId)
+  }
 
   readRating(val: string) {
 
@@ -58,7 +60,7 @@ export class MovieDetailsComponent implements OnInit {
     })
     let options = { headers: headers };
     let rating = { "value": this.rated };
-    this.http.post(`https://api.themoviedb.org/3/movie/${this.selectedMovieId}/rating?api_key=${this.api_key}`, rating, options);
+    this.http.post(`https://api.themoviedb.org/3/movie/${this.selectedMovieId}/rating?api_key=${this.api_key}&${this.guestSessionId}`, rating, options);
 
   }
 

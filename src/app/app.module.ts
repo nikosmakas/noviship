@@ -12,12 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { SearchPageComponent } from './search-page/search-page.component'; //lets make an http request
 
+import { ValidatorDirective } from './validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieDetailsComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    ValidatorDirective
   ],
   imports: [
     BrowserModule,

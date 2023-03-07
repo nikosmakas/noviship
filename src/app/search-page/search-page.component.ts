@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
 import { OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
@@ -15,6 +17,9 @@ export class SearchPageComponent {
   results: any[] = [];
 
   guestSessionId!: string;
+
+  constructor(private http: HttpClient,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     //get session id
@@ -43,24 +48,55 @@ export class SearchPageComponent {
 
   }
 
-  constructor(private http: HttpClient,
-    private dialog: MatDialog) { }
+  replaced!: string; //variable used as final query value
+  pageIndex!: number;
+  total_pages: any;
+
+ //formControl
+  query = new FormControl();
 
   searchMovie(val: string) {
     if (val) {
-      this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=${val}`, undefined) //hard coded due to a CORS(?) error
-        .subscribe(data => { this.results = data.results });
+      this.replaced = val.toString().replace(/ /g, '+');
+      this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=${this.replaced}`, undefined) //hard coded due to a CORS(?) error
+        .subscribe(data => { this.results = data.results;this.pageIndex = data.page; this.total_pages = data.total_pages; });
     }
     else {
       this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=joker`, undefined)
-        .subscribe(data => { this.results = data.results });
+        .subscribe(data => { this.results = data.results; this.pageIndex = data.page; this.total_pages = data.total_pages; });
     }
   }
   // to be replaced with `https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=${val}`
 
+  previousPage() {
+    if (this.pageIndex <= 1) { }//checks if the current page is the first page
+    else {
+      this.pageIndex--;
+      if (this.replaced !== undefined) {// checks if any value has been assigned
+        this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=${this.replaced}&page=${this.pageIndex}`, undefined) //hard coded due to a CORS(?) error
+          .subscribe(data => { this.results = data.results; });
+      }
+      else {
+        this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=joker&page=${this.pageIndex}`, undefined)//still havent fixed CORS error
+          .subscribe(data => { this.results = data.results; });
+      }
+    }
+  }
 
-
-
+  nextPage() {
+    if (this.pageIndex >= this.total_pages) { }//checks if the current page is the last page
+    else {
+      this.pageIndex++;
+      if (this.replaced !== undefined) {// checks if any value has been assigned
+        this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=${this.replaced}&page=${this.pageIndex}`, undefined) //hard coded due to a CORS(?) error
+          .subscribe(data => { this.results = data.results; });
+      }
+      else {
+        this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=joker&page=${this.pageIndex}`, undefined)//still havent fixed CORS error
+          .subscribe(data => { this.results = data.results; });
+      }
+    }
+}
 
 
 

@@ -1,8 +1,8 @@
 <form>
     <label for="search">Search for a movie:</label><br>
-    <input type="text" #box required placeholder="Search for a movie here..." name="search">
+    <input type="text" #query required placeholder="Search for a movie here..." name="search">
     
-    <button (click)="searchMovie(box.value)">Search</button>
+    <button (click)="searchMovie(query.value)">Search</button>
 </form>
 
 
@@ -30,6 +30,9 @@
     </div>
 </fieldset>
 
+<div style="text-align: center;">
+    <button (click)="previousPage()">Previous Page</button> <button (click)="nextPage()">NextPage</button>
+</div>
 
 <!--paginator paginate-->
 <!--

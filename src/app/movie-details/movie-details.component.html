@@ -1,8 +1,4 @@
 <h1 style="text-align: center; font-weight: bolder;">Movie Details</h1>
-<!-- <router-outlet></router-outlet> -->
-
-
-
 
 <fieldset>
   <div>
@@ -17,16 +13,10 @@
         <p class="mat-card-content">ReleaseDate : {{ results.release_date | date }}</p>
         <p class="mat-card-content">Revenue : {{results.revenue}}</p>
         <p class="mat-card-content">Average Rating : {{ results.vote_average }}</p>
-        <p class="mat-card-content">VoteCount:  {{results.vote_count}}</p>
-
-
-        <div *ngFor="let lang of results.spoken_languages"> <!--FIX THIS-->
-        
-          <p class="mat-card-content">Spoken Languages: {{lang.english_name}},</p>
+        <p class="mat-card-content">VoteCount: {{results.vote_count}}</p>
+        <div *ngFor="let lang of results.spoken_languages">
+          <p class="mat-card-content">Spoken Languages: {{lang.english_name}}</p>
         </div>
-
-
-
       </mat-card-content>
       <input type="range" id="rating" min="0.5" max="10.0" step="0.5" name="rating" #range
         (mouseup)="readRating(range.value)" (mousedown)="readRating(range.value)"
@@ -35,12 +25,6 @@
     </mat-card>
   </div>
 </fieldset>
-
-
-
-
-
-
 
 
 <footer>
