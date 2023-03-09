@@ -3,7 +3,7 @@
     <input type="text" placeholder="Search for a movie here..." #query appValidator formControlName="searchQuery">
     <button [disabled]="searchForm.invalid || !searchForm.touched" (click)="searchMovie(query.value)">Search</button>
     <br>
-    <span *ngIf="searchForm.controls['searchQuery'].errors?.['invalid']">{{
+    <span style="font-style: italic; color: dimgrey;" *ngIf="searchForm.controls['searchQuery'].errors?.['invalid']">{{
         searchForm.controls['searchQuery'].errors?.['message'] }}</span>
 
 

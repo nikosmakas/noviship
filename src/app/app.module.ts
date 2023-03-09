@@ -13,13 +13,15 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { SearchPageComponent } from './search-page/search-page.component'; //lets make an http request
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ValidatorDirective } from './validator.directive';
+import { MoviesCollectionsComponent } from './movies-collections/movies-collections.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieDetailsComponent,
     SearchPageComponent,
-    ValidatorDirective
+    ValidatorDirective,
+    MoviesCollectionsComponent
   ],
   imports: [
     BrowserModule,
