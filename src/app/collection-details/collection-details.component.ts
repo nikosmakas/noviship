@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
-
+import { collections } from '../models/collection.model';
+import { OnInit } from '@angular/core';
+import { CollectionsServiceService } from '../collections-service.service';
 @Component({
   selector: 'app-collection-details',
   templateUrl: './collection-details.component.html',
   styleUrls: ['./collection-details.component.css']
 })
+
 export class CollectionDetailsComponent {
 
-  constructor(private dialog: MatDialog){}
+  constructor(private dialog: MatDialog,){}
+  
 
   OpenPopup(getId: any) { // opens movie details from collection details
     const dialogConfig: any = new MatDialogConfig();

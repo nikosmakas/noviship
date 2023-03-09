@@ -1,13 +1,13 @@
 <h1>My Collections</h1>
 
-<div ><!--*ngIf="collection.length === 0" -->
+<div *ngIf="collections.length === 0"><!-- -->
     <p>No collections found.</p>
 </div>
 
-<ul ><!-- *ngIf="collections.length > 0"-->
-    <li ><!--*ngFor="let collection of collections" -->
-        <!-- <a [routerLink]="['/collection-details', collection.id]">{{ collection.title }}</a>
-        <p>{{ collection.description }}</p> -->
+<ul *ngIf="collections.length > 0"><!-- -->
+    <li *ngFor="let collection of collections"><!-- -->
+        <a [routerLink]="['/collection-details', collection.id]">{{ collection.title }}</a>
+        <p>{{ collection.description }}</p>
     </li>
 </ul>
 <button routerLink="/create-collection">Create a Collection</button>
