@@ -1,5 +1,5 @@
 <form [formGroup]="searchForm">
-    <label for="search">Search for a movie:</label><br>
+    <label for="search" style="font-size:x-large;">Search for a movie:</label><br>
     <input type="text" placeholder="Search for a movie here..." #query appValidator formControlName="searchQuery">
     <button [disabled]="searchForm.invalid || !searchForm.touched" (click)="searchMovie(query.value)">Search</button>
     <br>

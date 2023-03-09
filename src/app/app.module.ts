@@ -14,6 +14,8 @@ import { SearchPageComponent } from './search-page/search-page.component'; //let
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ValidatorDirective } from './validator.directive';
 import { MoviesCollectionsComponent } from './movies-collections/movies-collections.component';
+import { CollectionDetailsComponent } from './collection-details/collection-details.component';
+import { CreateCollectionComponent } from './create-collection/create-collection.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { MoviesCollectionsComponent } from './movies-collections/movies-collecti
     MovieDetailsComponent,
     SearchPageComponent,
     ValidatorDirective,
-    MoviesCollectionsComponent
+    MoviesCollectionsComponent,
+    CollectionDetailsComponent,
+    CreateCollectionComponent
   ],
   imports: [
     BrowserModule,

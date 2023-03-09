@@ -1,7 +1,6 @@
 <header>
   <h1 style="text-align: center; font-weight: bolder;">{{title}}</h1>  
-<app-search-page></app-search-page>
+
 </header>
-
-
-<!--<router-outlet></router-outlet>-->
+<div style="text-align: center;"><button [routerLink]="['/']">Search Page</button> <button [routerLink]="['/movies-collections']"> Movies Collections</button></div>
+<router-outlet></router-outlet>

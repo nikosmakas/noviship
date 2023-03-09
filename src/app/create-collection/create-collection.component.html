@@ -1,0 +1,10 @@
+<h1>Create a new collection</h1>
+
+<form (ngSubmit)="onSubmit()">
+    <label for="title">Title : </label><br>
+    <input type="text" name="title" [(ngModel)]="title" required><br>
+    <p><label for="description">Description : </label><br>
+    <textarea name="description" [(ngModel)]="description" required></textarea>
+    </p>
+    <button type="submit">Create Collection</button>
+</form> 
