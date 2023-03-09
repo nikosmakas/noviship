@@ -11,7 +11,7 @@ export class MoviesCollectionsComponent implements OnInit{
 
   constructor(private collectionsService: CollectionsServiceService){}
 
-  collections:any ;
+  collections:any ; //make it type: collections
 
   ngOnInit() {
     this.collections=this.collectionsService.getCollections()

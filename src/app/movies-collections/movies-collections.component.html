@@ -1,12 +1,13 @@
 <h1>My Collections</h1>
 
-<div *ngIf="collections.length === 0"><!-- -->
+<div *ngIf="collections.length === 0">
     <p>No collections found.</p>
+    <p>You need to create a collection in order to add movies to it.</p>
 </div>
 
-<ul *ngIf="collections.length > 0"><!-- -->
-    <li *ngFor="let collection of collections"><!-- -->
-        <a [routerLink]="['/collection-details', collection.id]">{{ collection.title }}</a>
+<ul *ngIf="collections.length > 0">
+    <li *ngFor="let collection of collections">
+        <a [routerLink]="['/collection-details', collection.id]">{{ collection.title }}</a> <!-- make it so it sends the id to collection details component.ts-->
         <p>{{ collection.description }}</p>
     </li>
 </ul>
