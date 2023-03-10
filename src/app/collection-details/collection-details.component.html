@@ -1,10 +1,10 @@
-<p>collection-details works!<!--  {{collection.title }} <br> {{collection.description}}--></p>
-
+<p>Collection Title: {{collection.title }}</p> <br> 
+<p>Collection Description: {{collection.description}}</p>
 <ul  >
-    <li><!-- *ngFor="let movie of collection"-->
-        <!-- Title : {{movie.title}} Movie ID: {{movie.id}}   
+    <li *ngFor="let movie of collection"><!-- -->
+        Title : {{movie.title}} Movie ID: {{movie.id}}   
             <button>Remove from collection</button> 
-            <button [routerLink]="['/movie-details']" (click)="openPopup()">View Details</button> -->
+            <button [routerLink]="['/movie-details']" (click)="openPopup(collection.id)">View Details</button> 
     </li>
 
 </ul>

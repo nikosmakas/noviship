@@ -29,7 +29,7 @@ export class CollectionDetailsComponent implements OnInit{
     this.collection = this.collectionsService.getCollection(id); 
     }
 
-  OpenPopup(getId: any) { // opens movie details from collection details
+    openPopup(getId: any) { // opens movie details from collection details
     const dialogConfig: any = new MatDialogConfig();
 
     dialogConfig.disableClose = false;
