@@ -7,15 +7,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatListModule } from '@angular/material/list'
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { SearchPageComponent } from './search-page/search-page.component'; //lets make an http request
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidatorDirective } from './validator.directive';
 import { MoviesCollectionsComponent } from './movies-collections/movies-collections.component';
 import { CollectionDetailsComponent } from './collection-details/collection-details.component';
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
+import { AddToCollectionPopupComponent } from './add-to-collection-popup/add-to-collection-popup.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { CreateCollectionComponent } from './create-collection/create-collection
     ValidatorDirective,
     MoviesCollectionsComponent,
     CollectionDetailsComponent,
-    CreateCollectionComponent
+    CreateCollectionComponent,
+    AddToCollectionPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -36,11 +40,13 @@ import { CreateCollectionComponent } from './create-collection/create-collection
     MatPaginatorModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
+    MatListModule,
+    MatFormFieldModule   
+
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[MovieDetailsComponent]//In order for the component to be usable as a dialog body
+  entryComponents: [MovieDetailsComponent]//In order for the component to be usable as a dialog body
 })
 export class AppModule { }

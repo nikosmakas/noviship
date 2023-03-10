@@ -9,13 +9,14 @@
 
 </form>
 
-
-<button >Add selected movies to a collection</button><!-- open mat-dialog, with the selected movie ids as data-->
+<button mat-button color="primary"  (click)="openAddToCollectionPopup()">Add to Collection</button> <!-- [disabled]="selectedMovies.length === 0 || collections.length === 0"-->
+<!--<span style="font-style: italic; color: dimgrey;" *ngIf="selectedMovies.length === 0 || collections.length === 0">Please select at least one movie and have at least one collection to add the selected movies to.</span>
+-->
 <fieldset>
 
     <div *ngFor="let movie of results">
         <mat-card>
-            <input type="checkbox" id="{{movie.id}}" #getId><!-- for step3. add movie(s) to collection-->
+            <input type="checkbox" id="{{movie.id}}" name="{{movie.title}}" #getId><!-- for step3. add movie(s) to collection-->
             <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"
                 class="mat-card-image">
             <mat-card-content>

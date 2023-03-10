@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
+import { AddToCollectionPopupComponent } from './add-to-collection-popup/add-to-collection-popup.component';
 
-import { AppComponent } from './app.component';
 import { CollectionDetailsComponent } from './collection-details/collection-details.component';
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
-import { collections } from './models/collection.model';
 
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MoviesCollectionsComponent } from './movies-collections/movies-collections.component';
@@ -16,6 +15,7 @@ const routes: Routes = [
   {path: 'movies-collections', component: MoviesCollectionsComponent},
   {path: 'collection-details/:id', component: CollectionDetailsComponent},
   {path: 'create-collection', component: CreateCollectionComponent},
+  {path: 'add-to-collection-popup', component :AddToCollectionPopupComponent}
 ];
 
 @NgModule({

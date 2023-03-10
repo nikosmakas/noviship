@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Add to Collection</h2>
+
+<div mat-dialog-content>
+  <mat-selection-list [(ngModel)]="selectedCollection" #collectionsList>
+    <mat-list-option *ngFor="let collection of collections" [value]="collection.id">
+      {{ collection.title }}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="goBack()">Cancel</button>
+  <button mat-button [disabled]="!selectedCollection" (click)="addMoviesToCollection()">Add</button>
+  <!--   
+      <button mat-button [mat-dialog-close]="{ collectionId: collectionsList.selectedOptions.selected[0].value, moviesToAdd: movies }" 
+      [disabled]="!collectionsList.selectedOptions.selected.length">Add</button> the "?" after selected[0] stays there cause the user might click Cancel before selecting a list.-->
+
+
+</div>
+
+
+<mat-error *ngIf="!selectedCollection">Please select a collection.</mat-error>

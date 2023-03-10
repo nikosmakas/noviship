@@ -1,10 +1,10 @@
-<p>Collection Title: {{collection.title }}</p> <br> 
-<p>Collection Description: {{collection.description}}</p>
-<ul  >
-    <li *ngFor="let movie of collection"><!-- -->
-        Title : {{movie.title}} Movie ID: {{movie.id}}   
-            <button>Remove from collection</button> 
-            <button [routerLink]="['/movie-details']" (click)="openPopup(collection.id)">View Details</button> 
+<p>Collection Title: {{collection?.title }}</p> <br>
+<p>Collection Description: {{collection?.description}}</p>
+<ul><!--collection?.movies ensures that Angular does not try to iterate over the movies array if collection is undefined.-->
+    <li *ngFor="let movie of collection?.movies">
+        Title : {{movie.title}} Movie ID: {{movie.id}}
+        <button>Remove from collection</button>
+        <button [routerLink]="['/movie-details']" (click)="openPopup(collection.id)">View Details</button>
     </li>
 
 </ul>

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { movies } from './models/collection.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Injectable } from '@angular/core';
 export class CollectionsServiceService {
 
   private collectionsKey = 'movie-collections';
-  private currentID:number=0;
+  private currentID:number=1;
   constructor() { }
 
   getCollections(): any[] {
@@ -37,6 +38,16 @@ export class CollectionsServiceService {
     localStorage.removeItem(this.collectionsKey);
     this.currentID = 0;
   }
+
+  addMoviesToCollection(collectionId: number, movie: movies) {
+    const collections = this.getCollections();
+    const collection = collections.find((c) => c.id === collectionId);
+    if (collection) {
+      collection.movies.push(movie);
+      this.saveCollections(collections);
+    }
+  }
+  
   
 }
   
