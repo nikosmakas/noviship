@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CollectionDetailsComponent } from './collection-details/collection-details.component';
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
+import { collections } from './models/collection.model';
 
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MoviesCollectionsComponent } from './movies-collections/movies-collections.component';
@@ -13,7 +14,7 @@ const routes: Routes = [
   {path: '', component: SearchPageComponent},
   {path: 'movie-details', component: MovieDetailsComponent },
   {path: 'movies-collections', component: MoviesCollectionsComponent},
-  {path: 'collection-details', component: CollectionDetailsComponent},
+  {path: 'collection-details/:id', component: CollectionDetailsComponent},
   {path: 'create-collection', component: CreateCollectionComponent},
 ];
 

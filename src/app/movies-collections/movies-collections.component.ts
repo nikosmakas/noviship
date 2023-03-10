@@ -17,5 +17,8 @@ export class MoviesCollectionsComponent implements OnInit{
     this.collections=this.collectionsService.getCollections()
   }
 
-
+  resetCollections(){
+    this.collectionsService.resetCollections();
+    this.collections=[];
+  }
 }
