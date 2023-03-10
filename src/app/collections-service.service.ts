@@ -39,7 +39,17 @@ export class CollectionsServiceService {
     this.currentID = 0;
   }
 
-  addMoviesToCollection(collectionId: number, movie: movies) {
+  addMoviesToCollection(collectionId: number, moviesToAdd: movies[]) {
+    const collections = this.getCollections();
+    const collectionIndex = collections.findIndex(collection => collection.id === collectionId);
+    if (collectionIndex > -1) {
+      const newMovies = [...moviesToAdd]; // create a new array of moviesToAdd
+      collections[collectionIndex].movies.push(newMovies);
+      this.saveCollections(collections);
+    }
+  }
+/*
+  addMoviesToCollection(collectionId: number, movie: movies[]) {
     const collections = this.getCollections();
     const collection = collections.find((c) => c.id === collectionId);
     if (collection) {
@@ -47,7 +57,7 @@ export class CollectionsServiceService {
       this.saveCollections(collections);
     }
   }
-  
+  */
   
 }
   

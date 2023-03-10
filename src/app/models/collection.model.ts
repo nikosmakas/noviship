@@ -3,7 +3,7 @@ export class collections {
     id!:number;
     title!: string;
     description!: string;
-    movies: movies[] = [];
+    movies!: movies[];
 
 }
 

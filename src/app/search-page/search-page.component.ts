@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogConfig,MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
 import { OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -40,21 +40,24 @@ export class SearchPageComponent implements OnInit {
 
   }
 
-  
+
   //added type assertion so that TS will always treat this as type HTMLInputElement
-  
+
   openAddToCollectionPopup() {
     const selectedMovies = document.querySelectorAll('input[type="checkbox"]:checked') as NodeListOf<HTMLInputElement>; //list all the input elements of type "checkbox" that are currently checked. 
     if (selectedMovies.length === 0) {
       alert('Please select at least one movie to add to a collection.');
       return;
     }
-    
+
     const collections = this.collectionsService.getCollections();
     if (collections.length === 0) {
       alert('There are no collections to add the selected movies to.');
       return;
     }
+    const moviesToAdd: movies[] = Array.from(selectedMovies).map((movie: HTMLInputElement) => {
+      return { id: parseInt(movie.id), title: movie.name };
+    });
 
     const dialogConfig: any = new MatDialogConfig();
     dialogConfig.disableClose = false;
@@ -62,35 +65,40 @@ export class SearchPageComponent implements OnInit {
     dialogConfig.closeOnNavigation = true;
     dialogConfig.minHeight = 500;
     dialogConfig.minWidth = 400;
-    dialogConfig.data = {
-      movies: Array.from(selectedMovies).map((movie: HTMLInputElement) => {
-        return { id: parseInt(movie.id), title: movie.name };
-      }),
+    dialogConfig.data = { moviesToAdd: moviesToAdd,
+      //movies: Array.from(selectedMovies).map((movie: HTMLInputElement) => {
+      //  return { id: parseInt(movie.id), title: movie.name };
+      //}),
       collections: collections
     };
-    
     const dialogRef = this.dialog.open(AddToCollectionPopupComponent, dialogConfig)
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const collectionId = result.collectionId;
+    dialogRef.afterClosed().subscribe(result => {    
+      console.log(result);
+      if (result && result.collectionId && result.moviesToAdd) {
+        const collectionIds = result.collectionId;
         const moviesToAdd = result.moviesToAdd;
-        this.collectionsService.addMoviesToCollection(collectionId, moviesToAdd);
+        if (collectionIds === 0) { return }
+        else {
+          for (const collectionId of collectionIds) {// in case multiple lists were selected
+            //this.collectionsService.addMoviesToCollection(collectionId, moviesToAdd); // the movies are pushed from the addtocollectionpopup component
+          }
+        }
       }
-    });  
+    });
   }
-  
+
   replaced!: string; //variable used as final query value
   pageIndex!: number;
   total_pages: any;
-  
-  
+
+
   searchMovie(val: string) {
     this.replaced = val.toString().replace(/ /g, '+');
     this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=85204a8cc33baf447559fb6d51b18313&query=${this.replaced}`, undefined)
-    .subscribe(data => { this.results = data.results; this.pageIndex = data.page; this.total_pages = data.total_pages; });
+      .subscribe(data => { this.results = data.results; this.pageIndex = data.page; this.total_pages = data.total_pages; });
   }
-  
+
   openPopup(getId: any) {
     const dialogConfig: any = new MatDialogConfig();
 
@@ -110,7 +118,7 @@ export class SearchPageComponent implements OnInit {
     this.dialog.open(MovieDetailsComponent, dialogConfig);
 
   }
-  
+
   previousPage() {
     if (this.pageIndex <= 1) { }//checks if the current page is the first page
     else {
